@@ -1,8 +1,3 @@
-// let {card} = require('./card');
-import { make_card } from './card';
-
-
-
 async function getInput() {
     org = document.getElementById("organization").value;
     numberOfRepos = document.getElementById("number1").value;
@@ -19,7 +14,6 @@ async function getRepos(n, m, organization) {
     for (let x = 1; x <= Math.floor(n/100); x++){
         const user_url = `https://api.github.com/search/repositories?q=user:\"${organization}\"&page=${x}&sort=forks&order=desc&per_page=100`
         response = await fetch(user_url)
-        // console.log("fetched")
         result = await response.json()
 
         console.log(result)
@@ -85,19 +79,19 @@ function clear() {
 }
 
 async function getOldestForks(repo, m, repoElement) {
-    const urll = `https://api.github.com/repos/${repo.owner.login}/${repo.name}/forks?q=repo:${repo.name}&sort=oldest`
-    console.log(urll);
-    let responsee = await fetch(urll)
-    resultt = await responsee.json()
+    const repo_url = `https://api.github.com/repos/${repo.owner.login}/${repo.name}/forks?q=repo:${repo.name}&sort=oldest`
+    console.log(repo_url);
+    let repo_response = await fetch(repo_url)
+    repo_result = await repo_response.json()
 
-    console.log(resultt);
+    console.log(repo_result);
     const ol = document.createElement("ol");
     for (let i = 0; i < m; i++){
-        ol.innerHTML += `<li><a href = ${resultt[i].owner.html_url}>${resultt[i].owner.login}</a></li>`
+        ol.innerHTML += `<li><a href = ${repo_result[i].owner.html_url}>${repo_result[i].owner.login}</a></li>`
     }
     
     repoElement.appendChild(ol);
-    return resultt
+    return repo_result
 }
 
 async function greet() {
