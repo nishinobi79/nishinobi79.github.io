@@ -1,3 +1,8 @@
+// let {card} = require('./card');
+import { make_card } from './card';
+
+
+
 async function getInput() {
     org = document.getElementById("organization").value;
     numberOfRepos = document.getElementById("number1").value;
@@ -67,6 +72,7 @@ async function getRepos(n, m, organization) {
             getOldestForks(result.items[i], m, repoElement);
         });
 
+
         repoElement.appendChild(document.createElement("br"));
         // getOldestForks(result.items[i], m, repoElement);
     }
@@ -96,4 +102,9 @@ async function getOldestForks(repo, m, repoElement) {
 
 async function greet() {
     alert("Hello World!");
+}
+
+function test() {
+    repoResult = document.getElementById("repoResult");
+    repoResult.innerHTML = card;
 }
